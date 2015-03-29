@@ -1,0 +1,2 @@
+defmodule Qiniu do
+end
