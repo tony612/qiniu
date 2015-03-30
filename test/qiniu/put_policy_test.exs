@@ -4,9 +4,12 @@ defmodule Qiniu.PutPolicyTest do
   alias Qiniu.PutPolicy
 
   test "to_json returns json string with nil" do
-    policy = struct(PutPolicy, scope: nil)
-    str = PutPolicy.to_json(policy)
-    assert !String.contains?(str, "scope")
-    assert String.contains?(str, "{\"save_key\":\"saveKey\",")
+    policy = %{__struct__: PutPolicy, scope: "scope", save_key: nil}
+    assert PutPolicy.to_json(policy) == "{\"scope\":\"scope\"}"
+  end
+
+  test "encoded_json" do
+    policy = %{__struct__: PutPolicy, scope: "scope"}
+    assert PutPolicy.encoded_json(policy) == "eyJzY29wZSI6InNjb3BlIn0="
   end
 end

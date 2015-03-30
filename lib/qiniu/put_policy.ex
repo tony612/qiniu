@@ -21,9 +21,13 @@ defmodule Qiniu.PutPolicy do
 
   def to_json(%Qiniu.PutPolicy{} = policy) do
     policy
-      |> Map.delete(:__struct__)
+      |> Map.from_struct
       |> Enum.filter(fn {_, v} -> v end)
       |> Enum.into(%{})
       |> Poison.encode!
+  end
+
+  def encoded_json(%Qiniu.PutPolicy{} = policy) do
+    policy |> to_json |> Base.url_encode64
   end
 end
