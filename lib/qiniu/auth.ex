@@ -2,7 +2,8 @@ defmodule Qiniu.Auth do
   alias Qiniu.PutPolicy
 
   def generate_uptoken(%PutPolicy{} = put_policy) do
-    [access_key: access_key, secret_key: secret_key] = Qiniu.config
+    [access_key: access_key, secret_key: secret_key] =
+      Keyword.take(Qiniu.config, [:access_key, :secret_key])
 
     encoded_put_policy = PutPolicy.encoded_json put_policy
     encoded_sign = hex_digest(secret_key, encoded_put_policy)
