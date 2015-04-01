@@ -1,4 +1,6 @@
 defmodule Qiniu.Auth do
+  @moduledoc false
+
   alias Qiniu.PutPolicy
 
   def generate_uptoken(%PutPolicy{} = put_policy) do
