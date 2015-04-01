@@ -22,7 +22,7 @@ defmodule Qiniu.PutPolicy do
   def to_json(%Qiniu.PutPolicy{} = policy) do
     policy
       |> Map.from_struct
-      |> Enum.filter(fn {_, v} -> v end)
+      |> Enum.filter(fn {_, v} -> v != nil end)
       |> Enum.into(%{})
       |> Poison.encode!
   end
