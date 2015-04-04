@@ -1,7 +1,11 @@
 defmodule QiniuTest do
   use ExUnit.Case
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  test "default config" do
+    assert Qiniu.config[:up_host] == "http://up.qiniu.com"
+  end
+
+  test "override config" do
+    assert Qiniu.config[:access_key] == "key"
   end
 end
