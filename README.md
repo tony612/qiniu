@@ -9,4 +9,20 @@ Qiniu sdk for Elixir
 
 ## Usage
 
-See the [doc](http://hexdocs.pm/qiniu/)
+Config the keys
+
+```elixir
+# config.exs
+config :qiniu, Qiniu,
+  access_key: "key",
+  secret_key: "secret"
+```
+
+Upload a local file
+
+```elixir
+put_policy = %Qiniu.PutPolicy{scope: "books", deadline: 1427990400}
+Qiniu.Uploader.upload put_policy, "~/cool.jpg", key: "cool.jpg"
+```
+
+See the [doc](http://hexdocs.pm/qiniu/) for detail
