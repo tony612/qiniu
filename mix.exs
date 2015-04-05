@@ -24,7 +24,8 @@ defmodule Qiniu.Mixfile do
      {:httpoison, "~> 0.6.2"},
      {:ex_doc, "~> 0.7", only: :docs},
      {:earmark, "~> 0.1", only: :docs},
-     {:inch_ex, only: :docs}
+     {:inch_ex, only: :docs},
+     {:mock, "~> 0.1.0", only: :test}
     ]
   end
 

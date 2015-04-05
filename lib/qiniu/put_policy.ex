@@ -50,6 +50,47 @@ defmodule Qiniu.PutPolicy do
             checksum:              String.t | nil
             }
 
+  @default_expires_in 3600
+
+  @doc """
+  A better way to build PutPolicy, which can calculate deadline for you
+  from expires_in(seconds) and can accpet the options. See examples below.
+
+  ## Examples
+
+      iex> Qiniu.PutPolicy.build("scope")
+      %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 3600}
+
+      iex> Qiniu.PutPolicy.build("scope", 4000)
+      %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 4000}
+
+      iex> Qiniu.PutPolicy.build("scope", insert_only: 1)
+      %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 3600, insert_only: 1}
+
+      iex> Qiniu.PutPolicy.build("scope", 4000, insert_only: 1)
+      %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 4000, insert_only: 1}
+
+      # scope and deadline in options won't be used for override
+      iex> Qiniu.PutPolicy.build("scope", 4000, scope: "other_scope")
+      %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 4000}
+  """
+  def build(scope) do
+    build(scope, @default_expires_in, [])
+  end
+
+  def build(scope, expires_in) when is_integer(expires_in) and expires_in > 0 do
+    build(scope, expires_in, [])
+  end
+
+  def build(scope, opts) when is_list(opts) do
+    build(scope, @default_expires_in, opts)
+  end
+
+  def build(scope, expires_in, opts) when is_integer(expires_in) and
+                                     expires_in > 0 and is_list(opts) do
+    deadline = calculate_deadline(expires_in)
+    struct(PutPolicy, Keyword.merge(opts, [scope: scope, deadline: deadline]))
+  end
 
   @doc """
   Change put_policy to json string expect the `nil` values.
@@ -81,5 +122,9 @@ defmodule Qiniu.PutPolicy do
   @spec encoded_json(PutPolicy.t) :: String.t
   def encoded_json(%PutPolicy{} = policy) do
     policy |> to_json |> Base.url_encode64
+  end
+
+  defp calculate_deadline(expires_in) when is_integer(expires_in) and expires_in > 0  do
+    Qiniu.Utils.current_seconds + expires_in
   end
 end
