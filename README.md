@@ -21,7 +21,7 @@ config :qiniu, Qiniu,
 Upload a local file
 
 ```elixir
-put_policy = %Qiniu.PutPolicy{scope: "books", deadline: 1427990400}
+put_policy = Qiniu.PutPolicy("books")
 Qiniu.Uploader.upload put_policy, "~/cool.jpg", key: "cool.jpg"
 ```
 
