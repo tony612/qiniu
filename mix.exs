@@ -1,7 +1,7 @@
 defmodule Qiniu.Mixfile do
   use Mix.Project
 
-  @version "0.1.1"
+  @version "0.1.2"
 
   def project do
     [app: :qiniu,

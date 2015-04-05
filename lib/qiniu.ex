@@ -25,7 +25,7 @@ defmodule Qiniu do
 
   defp default_config do
     [
-      user_agent:       "QiniuElixir/#{Qiniu.Mixfile.project[:version]}/Ruby/#{System.version}",
+      user_agent:       "QiniuElixir/#{System.version}",
       content_type:     "application/x-www-form-urlencoded",
       up_host:          "http://up.qiniu.com",
     ]
