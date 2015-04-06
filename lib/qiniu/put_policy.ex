@@ -28,7 +28,7 @@ defmodule Qiniu.PutPolicy do
             mime_limit:            nil,
             checksum:              nil
 
-  @type t :: %PutPolicy{
+  @type t :: %Qiniu.PutPolicy{
             scope:                 String.t,
             deadline:              integer,
             insert_only:           integer | nil,
@@ -54,29 +54,31 @@ defmodule Qiniu.PutPolicy do
 
   @doc """
   A better way to build PutPolicy, which can calculate deadline for you
-  from expires_in(seconds) and can accpet the options. See examples below.
+  from expires_in(seconds) and can accpet the options. See build/2, build/3.
 
   ## Examples
 
       iex> Qiniu.PutPolicy.build("scope")
       %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 3600}
+  """
+  @spec build(String.t) :: t
+  def build(scope) do
+    build(scope, @default_expires_in, [])
+  end
+
+  @doc """
+  build/2
+
+  ## Examples
 
       iex> Qiniu.PutPolicy.build("scope", 4000)
       %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 4000}
 
       iex> Qiniu.PutPolicy.build("scope", insert_only: 1)
       %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 3600, insert_only: 1}
-
-      iex> Qiniu.PutPolicy.build("scope", 4000, insert_only: 1)
-      %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 4000, insert_only: 1}
-
-      # scope and deadline in options won't be used for override
-      iex> Qiniu.PutPolicy.build("scope", 4000, scope: "other_scope")
-      %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 4000}
   """
-  def build(scope) do
-    build(scope, @default_expires_in, [])
-  end
+  @spec build(String.t, Integer.t | Keyword.t) :: t
+  def build(scope, expires_in_or_options)
 
   def build(scope, expires_in) when is_integer(expires_in) and expires_in > 0 do
     build(scope, expires_in, [])
@@ -86,6 +88,19 @@ defmodule Qiniu.PutPolicy do
     build(scope, @default_expires_in, opts)
   end
 
+  @doc """
+  build/3
+
+  ## Examples
+
+      iex> Qiniu.PutPolicy.build("scope", 4000, insert_only: 1)
+      %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 4000, insert_only: 1}
+
+      # scope and deadline in options won't be used for override
+      iex> Qiniu.PutPolicy.build("scope", 4000, scope: "other_scope")
+      %Qiniu.PutPolicy{scope: "scope", deadline: NOW_TIME + 4000}
+  """
+  @spec build(String.t, Integer.t, Keyword.t) :: t
   def build(scope, expires_in, opts) when is_integer(expires_in) and
                                      expires_in > 0 and is_list(opts) do
     deadline = calculate_deadline(expires_in)
