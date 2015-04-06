@@ -1,5 +1,9 @@
 # Changelog
 
+## master
+
+* change `key` of `upload` to a required param instead of an option
+
 ## v0.1.2 (2015-4-5)
 
 * Change default user_agent

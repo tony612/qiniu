@@ -18,7 +18,14 @@ config :qiniu, Qiniu,
   secret_key: "secret"
 ```
 
-Upload a local file
+Get the token for uploading
+
+```elixir
+policy = Qiniu.PutPolicy.build("scope")
+uptoken = Qiniu.Auth.generate_uptoken(policy)
+```
+
+Upload a local file in server
 
 ```elixir
 put_policy = Qiniu.PutPolicy("books")
