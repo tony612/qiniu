@@ -3,9 +3,29 @@ defmodule Qiniu.AuthTest do
 
   alias Qiniu.Auth
 
+  import Mock
+
   test "generate_uptoken" do
     policy = %{__struct__: Qiniu.PutPolicy, scope: "scope"}
     assert Auth.generate_uptoken(policy) == "key:Bh5vAwrX2OI9syOKWXhheEm7OMw=:eyJzY29wZSI6InNjb3BlIn0="
+  end
+
+  test "authorize_download_url/2" do
+    with_mock Qiniu.Utils, [calculate_deadline: fn (3600)-> 1451491200 end] do
+      url = "http://my-bucket.qiniudn.com/sunflower.jpg"
+      result = "#{url}?e=1451491200&token=key:x8KR9b4GU1Py-VVFhnFjpW3MDv8="
+      assert Auth.authorize_download_url(url, 3600) == result
+    end
+  end
+
+  test "authorize_download_url/3" do
+    with_mock Qiniu.Utils, [calculate_deadline: fn (3600)-> 1451491200 end] do
+      host = "http://my-bucket.qiniudn.com"
+      key = "sunflower.jpg"
+      url = host <> "/" <> key
+      result = "#{url}?e=1451491200&token=key:x8KR9b4GU1Py-VVFhnFjpW3MDv8="
+      assert Auth.authorize_download_url(host, key, 3600) == result
+    end
   end
 
   test "hex_digest" do

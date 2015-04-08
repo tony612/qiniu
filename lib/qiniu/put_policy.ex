@@ -103,7 +103,7 @@ defmodule Qiniu.PutPolicy do
   @spec build(String.t, Integer.t, Keyword.t) :: t
   def build(scope, expires_in, opts) when is_integer(expires_in) and
                                      expires_in > 0 and is_list(opts) do
-    deadline = calculate_deadline(expires_in)
+    deadline = Qiniu.Utils.calculate_deadline(expires_in)
     struct(PutPolicy, Keyword.merge(opts, [scope: scope, deadline: deadline]))
   end
 
@@ -137,9 +137,5 @@ defmodule Qiniu.PutPolicy do
   @spec encoded_json(PutPolicy.t) :: String.t
   def encoded_json(%PutPolicy{} = policy) do
     policy |> to_json |> Base.url_encode64
-  end
-
-  defp calculate_deadline(expires_in) when is_integer(expires_in) and expires_in > 0  do
-    Qiniu.Utils.current_seconds + expires_in
   end
 end

@@ -4,9 +4,13 @@ defmodule Qiniu.Utils do
   """
 
   @doc """
-  Returns the value of time as an integer number of seconds since the Epoch.
+  Calculate deadline with expires_in(seconds)
   """
-  def current_seconds do
+  def calculate_deadline(expires_in) when is_integer(expires_in) and expires_in > 0  do
+    current_seconds + expires_in
+  end
+
+  defp current_seconds do
     {mega, sec, micro} = :erlang.now
     div(mega * 1_000_000 * 1_000_000 + sec * 1_000_000 + micro, 1_000_000)
   end
