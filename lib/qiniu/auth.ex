@@ -38,7 +38,7 @@ defmodule Qiniu.Auth do
     * expires_in - seconds to expire
   """
   def authorize_download_url(host, key, expires_in) do
-    authorize_download_url(host <> "/" <> key, expires_in)
+    authorize_download_url(Path.join(host, key), expires_in)
   end
 
   @doc """
