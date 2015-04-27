@@ -18,6 +18,8 @@ config :qiniu, Qiniu,
   secret_key: "secret"
 ```
 
+### Upload
+
 Get the token for uploading
 
 ```elixir
@@ -30,6 +32,14 @@ Upload a local file in server
 ```elixir
 put_policy = Qiniu.PutPolicy("books")
 Qiniu.Uploader.upload put_policy, "~/cool.jpg", key: "cool.jpg"
+```
+
+### Download
+
+Get the authorized download url
+
+```elixir
+Qiniu.Auth.authorize_download_url(url, 3600)
 ```
 
 See the [doc](http://hexdocs.pm/qiniu/) for detail
