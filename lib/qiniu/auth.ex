@@ -67,6 +67,22 @@ defmodule Qiniu.Auth do
     "#{download_url}&token=#{down_token}"
   end
 
+  def access_token(url, body \\ "") do
+    uri = URI.parse(url)
+    signing_str = if uri.query do
+                    "#{uri.path}?#{uri.query}\n#{body}"
+                  else
+                    uri.path <> "\n" <> body
+                  end
+
+    [access_key: access_key, secret_key: secret_key] =
+      Keyword.take(Qiniu.config, [:access_key, :secret_key])
+
+    encoded_sign = hex_digest(secret_key, signing_str)
+
+    access_key <> ":" <> encoded_sign
+  end
+
   @doc false
   def hex_digest(key, data) when is_binary(key) and is_binary(data) do
     :crypto.hmac(:sha, key, data) |> Base.url_encode64

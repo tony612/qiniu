@@ -28,6 +28,16 @@ defmodule Qiniu.AuthTest do
     end
   end
 
+  test "access_token/1" do
+    url = "http://rs.qiniu.com/move/bmV3ZG9jczpmaW5kX21hbi50eHQ=/bmV3ZG9jczpmaW5kLm1hbi50eHQ="
+    assert Auth.access_token(url) == "key:KcvqMmLJo0Xykcpj9k6loD6oHD4="
+  end
+
+  test "access_token/2" do
+    url = "http://rs.qiniu.com/move/bmV3ZG9jczpmaW5kX21hbi50eHQ=/bmV3ZG9jczpmaW5kLm1hbi50eHQ="
+    assert Auth.access_token(url, "foo") == "key:ORUvoSE8ZMmXMRHMs5JvayEZ4dE="
+  end
+
   test "hex_digest" do
     assert Auth.hex_digest("secret", "data") == "mBjjMGulrCZ7XyZ5_kq9N-bNe1Q="
   end
