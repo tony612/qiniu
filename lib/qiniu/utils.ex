@@ -11,7 +11,7 @@ defmodule Qiniu.Utils do
   end
 
   defp current_seconds do
-    {mega, sec, micro} = :erlang.now
-    div(mega * 1_000_000 * 1_000_000 + sec * 1_000_000 + micro, 1_000_000)
+    {mega, sec, _} = :erlang.now
+    mega * 1_000_000 + sec
   end
 end
