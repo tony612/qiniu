@@ -67,6 +67,14 @@ defmodule Qiniu.Auth do
     "#{download_url}&token=#{down_token}"
   end
 
+  @doc """
+  Get access token
+
+  ## Fields
+
+    * url - e.g. http://rs.qiniu.com/move/bmV3ZG9jczpmaW5kX21hbi50eHQ=/bmV3ZG9jczpmaW5kLm1hbi50eHQ=
+    * body - HTTP body, "" by default
+  """
   def access_token(url, body \\ "") do
     uri = URI.parse(url)
     signing_str = if uri.query do
