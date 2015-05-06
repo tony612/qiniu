@@ -3,7 +3,7 @@ defmodule Qiniu.HTTP do
 
   def post(url, body) do
     headers = [
-      accept: 'application/json',
+      accept: "application/json",
       connection: "close",
       user_agent: Qiniu.config[:user_agent],
     ]

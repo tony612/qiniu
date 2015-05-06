@@ -13,6 +13,12 @@ defmodule Qiniu.Uploader do
 
       put_policy = %Qiniu.PutPolicy{scope: "books", deadline: 1427990400}
       Qiniu.Uploader.upload put_policy, "~/cool.jpg", "cool.jpg"
+      # =>
+      %HTTPoison.Response{
+        body: "body",
+        headers: %{"connection" => "keep-alive", "content-length" => "517", ...},
+        status_code: 200
+      }
 
   ## Fields
 
