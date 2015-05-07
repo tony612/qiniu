@@ -28,6 +28,7 @@ defmodule Qiniu do
       user_agent:       "QiniuElixir/#{System.version}",
       content_type:     "application/x-www-form-urlencoded",
       up_host:          "http://up.qiniu.com",
+      rs_host:          "http://rs.qiniu.com"
     ]
   end
 end
