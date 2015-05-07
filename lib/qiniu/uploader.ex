@@ -29,7 +29,7 @@ defmodule Qiniu.Uploader do
   ## Options
 
     * `:crc32` - crc32 to check the file
-    * `others` - Custom fields, e.g. `foo: "foo", bar: "bar"`
+    * `others` - Custom fields `atom: "string"`, e.g. `foo: "foo", bar: "bar"`
   """
   def upload(put_policy, local_file, key, opts \\ [])
 
