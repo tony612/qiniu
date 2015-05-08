@@ -18,6 +18,21 @@ defmodule Qiniu.Resource do
     auth_post(url)
   end
 
+  @doc """
+  Copy one entry to another dest key
+
+  ## Fields
+
+    * `source_uri` - uri of your source entry, "<bucket>:<key>"
+    * `dest_uri` - uri of your dest entry, "<bucket>:<key>"
+  """
+  def copy(source_uri, dest_uri) do
+    encoded_source = Base.url_encode64(source_uri)
+    encoded_dest = Base.url_encode64(dest_uri)
+    url = Path.join([Qiniu.config[:rs_host], "copy", encoded_source, encoded_dest])
+    auth_post(url)
+  end
+
   defp auth_post(url, body \\ "") do
     Qiniu.HTTP.post url, body, headers: [
       Authorization: "QBox " <> Qiniu.Auth.access_token(url, body)
