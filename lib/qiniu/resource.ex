@@ -33,6 +33,33 @@ defmodule Qiniu.Resource do
     auth_post(url)
   end
 
+  @doc """
+  Move an entry to another dest
+
+  ## Fields
+
+    * `source_uri` - uri of your source entry, "<bucket>:<key>"
+    * `dest_uri` - uri of your dest entry, "<bucket>:<key>"
+  """
+  def move(source_uri, dest_uri) do
+    encoded_source = Base.url_encode64(source_uri)
+    encoded_dest = Base.url_encode64(dest_uri)
+    url = Path.join([Qiniu.config[:rs_host], "move", encoded_source, encoded_dest])
+    auth_post(url)
+  end
+
+  @doc """
+  Delete an entry
+
+  ## Fields
+
+    * `uri` - uri of your entry to delete, "<bucket>:<key>"
+  """
+  def delete(uri) do
+    url = Path.join([Qiniu.config[:rs_host], "stat", Base.url_encode64(uri)])
+    auth_post(url)
+  end
+
   defp auth_post(url, body \\ "") do
     Qiniu.HTTP.post url, body, headers: [
       Authorization: "QBox " <> Qiniu.Auth.access_token(url, body)
