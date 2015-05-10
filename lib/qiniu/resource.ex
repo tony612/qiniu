@@ -98,6 +98,20 @@ defmodule Qiniu.Resource do
     auth_post(url)
   end
 
+  @doc """
+  For the bucket which sets image storing, fetch resource from image source
+  and store to this bucket. If the entry exists in this bucket, override
+  the entry with the resource of image storing.
+
+  ## Fields
+
+    * `uri` - URI of destiny entry, "<bucket>:<key>"
+  """
+  def prefetch(uri) do
+    url = Path.join([Qiniu.config[:io_host], "prefetch", Base.url_encode64(uri)])
+    auth_post(url)
+  end
+
   defp auth_post(url, body \\ "") do
     Qiniu.HTTP.post url, body, headers: [
       Authorization: "QBox " <> Qiniu.Auth.access_token(url, body)
