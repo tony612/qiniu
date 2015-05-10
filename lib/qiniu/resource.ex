@@ -60,6 +60,29 @@ defmodule Qiniu.Resource do
     auth_post(url)
   end
 
+  @doc """
+  List resources in one bucket
+
+  ## Fields
+
+    * `bucket` - the bucket to list
+
+  ## Options
+
+    * `:limit` - Number to list(1~1000), default is 1000
+    * `:prefix` - Prefix of resources to list, default is `""`
+    * `:delimiter` - Directory separator to list common prefix, default is `""`
+    * `:marker` - Marker of last request, which can act as starting point of
+      this request, default is `""`
+  """
+  def list(bucket, opts \\ []) do
+    opts = Keyword.put(opts, :bucket, bucket)
+    params = Enum.map_join(opts, "&", fn({k, v}) -> "#{k}=#{v}" end)
+
+    url = Path.join([Qiniu.config[:rsf_host], "list?#{params}"])
+    auth_post(url)
+  end
+
   defp auth_post(url, body \\ "") do
     Qiniu.HTTP.post url, body, headers: [
       Authorization: "QBox " <> Qiniu.Auth.access_token(url, body)
