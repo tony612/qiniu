@@ -83,6 +83,21 @@ defmodule Qiniu.Resource do
     auth_post(url)
   end
 
+  @doc """
+  Fetch resource from a url, and store it in your own bucket
+
+  ## Fields
+
+    * `url` - URL of the external resource
+    * `entry_uri` - URI of your entry, "<bucket>:<key>"
+  """
+  def fetch(url, entry_uri) do
+    encoded_url = Base.url_encode64(url)
+    encoded_dest = Base.url_encode64(entry_uri)
+    url = Path.join([Qiniu.config[:io_host], "fetch", encoded_url, "to", encoded_dest])
+    auth_post(url)
+  end
+
   defp auth_post(url, body \\ "") do
     Qiniu.HTTP.post url, body, headers: [
       Authorization: "QBox " <> Qiniu.Auth.access_token(url, body)

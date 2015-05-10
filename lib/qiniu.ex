@@ -29,7 +29,8 @@ defmodule Qiniu do
       content_type:     "application/x-www-form-urlencoded",
       up_host:          "http://up.qiniu.com",
       rs_host:          "http://rs.qiniu.com",
-      rsf_host:         "http://rsf.qbox.me"
+      rsf_host:         "http://rsf.qbox.me",
+      io_host:          "http://iovip.qbox.me"
     ]
   end
 end
