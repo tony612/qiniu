@@ -43,3 +43,24 @@ Qiniu.Auth.authorize_download_url(url, 3600)
 ```
 
 See the [doc](http://hexdocs.pm/qiniu/) for detail
+
+### TODO
+
+Uploading
+
+- [x] 直传文件（upload）
+- [ ] 创建块（mkblk）
+- [ ] 上传片（bput）
+- [ ] 创建文件（bput）
+
+Resource management
+
+- [x] 获取资源信息（stat）
+- [x] 复制资源（copy）
+- [x] 移动资源（move）
+- [x] 删除资源（delete）
+- [ ] 批量操作（batch）
+- [x] 列举资源（list）
+- [x] 抓取资源（fetch）
+- [x] 更新镜像资源（prefetch）
+- [ ] 修改元信息（chgm）
