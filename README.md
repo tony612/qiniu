@@ -60,5 +60,5 @@ See the [doc](http://hexdocs.pm/qiniu/) for detail
   - [x] 列举资源（list）
   - [x] 抓取资源（fetch）
   - [x] 更新镜像资源（prefetch）
-  - [ ] 修改元信息（chgm）
+  - [x] 修改元信息（chgm）
 - [ ] Data handling

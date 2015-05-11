@@ -112,6 +112,21 @@ defmodule Qiniu.Resource do
     auth_post(url)
   end
 
+  @doc """
+  Change type(MIME type) of the entry
+
+  ## Fields
+
+    * `uri` - URI of the entry, "<bucket>:<key>"
+    * `mime` - MIME type to change
+  """
+  def chgm(entry_uri, mime) do
+    encoded_uri = Base.url_encode64(entry_uri)
+    encoded_mime = Base.url_encode64(mime)
+    url = Path.join([Qiniu.config[:rs_host], "chgm", encoded_uri, "mime", encoded_mime])
+    auth_post(url)
+  end
+
   defp auth_post(url, body \\ "") do
     Qiniu.HTTP.post url, body, headers: [
       Authorization: "QBox " <> Qiniu.Auth.access_token(url, body)
