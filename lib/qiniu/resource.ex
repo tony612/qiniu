@@ -51,6 +51,12 @@ defmodule Qiniu.Resource do
     op_url(:delete, uri) |> auth_post
   end
 
+  def batch(ops) do
+    params = Enum.map_join(ops, "&", &("op=" <> apply(__MODULE__, :op_path, &1)))
+    url = Qiniu.config[:rs_host] <> "?" <> params
+    auth_post(url)
+  end
+
   @doc """
   List resources in one bucket
 
