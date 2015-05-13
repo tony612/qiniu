@@ -62,3 +62,6 @@ See the [doc](http://hexdocs.pm/qiniu/) for detail
   - [x] 更新镜像资源（prefetch）
   - [x] 修改元信息（chgm）
 - [ ] Data handling
+  - [ ] Image
+    - [x] 图片基本信息（imageInfo）
+    - [x] 图片EXIF信息（exif）
