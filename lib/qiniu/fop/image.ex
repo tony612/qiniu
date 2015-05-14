@@ -15,11 +15,19 @@ defmodule Qiniu.Fog.Image do
   @doc """
   Get EXIF(EXchangeable Image File Format) of a image
 
-  ## Fields
-
-    * `url` - URL of the image, like http://qiniuphotos.qiniudn.com/gogopher.jpg
+  See `info/1` for the arguments
   """
   def exif(url) do
     HTTP.get(url <> "?exif")
   end
+
+  @doc """
+  Get average hue of the image
+
+  See `info/1` for the arguments
+  """
+  def avg_hue(url) do
+    HTTP.get(url <> "?imageAve")
+  end
+
 end

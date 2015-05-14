@@ -63,5 +63,6 @@ See the [doc](http://hexdocs.pm/qiniu/) for detail
   - [x] 修改元信息（chgm）
 - [ ] Data handling
   - [ ] Image
-    - [x] 图片基本信息（imageInfo）
+    - [x] 图片基本信息（info）
     - [x] 图片EXIF信息（exif）
+    - [x] 图片主色调（avg_hue）
