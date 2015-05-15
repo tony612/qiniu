@@ -22,6 +22,17 @@ defmodule Qiniu.Fog.Image do
   end
 
   @doc """
+  Add watermark to image
+  """
+  def watermark(:image, image_url, watermark_url, opts) do
+    type = 1
+    valid_opts = Keyword.take(opts, [:dissolve, :gravity, :dx, :dy])
+    params = Enum.map_join(valid_opts, "/", fn {k, v} -> "#{k}/#{v}" end)
+    params = "?watermark/1/image/#{Base.url_encode64(watermark_url)}/" <> params
+    HTTP.get image_url <> params
+  end
+
+  @doc """
   Get average hue of the image
 
   See `info/1` for the arguments
