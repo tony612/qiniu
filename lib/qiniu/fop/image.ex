@@ -22,13 +22,46 @@ defmodule Qiniu.Fog.Image do
   end
 
   @doc """
-  Add watermark to image
+  Add watermark to image. There're two kinds of watermarks. See
+
+  Refer to http://developer.qiniu.com/docs/v6/api/reference/fop/image/watermark.html
+
+  ## Fields
+
+    * type - `:image` or `:text`
+    * image_url - URL of the image to add watermark to
+    * watermark_url - image url of the watermark
+
+  ## Options
+
+  For image type:
+    * `:dissolve`
+    * `:gravity`
+    * `:dx`
+    * `:dy`
+
+  For text type:
+    * `:font`
+    * `:font_size`
+    * `:fill`
+    * `:dissolve`
+    * `:gravity`
+    * `:dx`
+    * `:dy`
   """
+  def watermark(type, image_url, watermark_url, opts)
   def watermark(:image, image_url, watermark_url, opts) do
-    type = 1
     valid_opts = Keyword.take(opts, [:dissolve, :gravity, :dx, :dy])
     params = Enum.map_join(valid_opts, "/", fn {k, v} -> "#{k}/#{v}" end)
     params = "?watermark/1/image/#{Base.url_encode64(watermark_url)}/" <> params
+    HTTP.get image_url <> params
+  end
+
+  def watermark(type, image_url, text, opts)
+  def watermark(:text, image_url, text, opts) do
+    valid_opts = Keyword.take(opts, [:font, :font_size, :fill, :dissolve, :gravity, :dx, :dy])
+    params = Enum.map_join(valid_opts, "/", fn {k, v} -> "#{k}/#{v}" end)
+    params = "?watermark/2/text/#{Base.url_encode64(text)}/" <> params
     HTTP.get image_url <> params
   end
 
