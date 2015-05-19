@@ -67,3 +67,4 @@ See the [doc](http://hexdocs.pm/qiniu/) for detail
     - [x] 图片EXIF信息（exif）
     - [x] 水印（watermark）
     - [x] 图片主色调（avg_hue）
+  - [x] 资源下载二维码（qrcode）
