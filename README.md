@@ -46,6 +46,13 @@ See the [doc](http://hexdocs.pm/qiniu/) for detail
 
 ### TODO
 
+Remaining tests will be added.
+
+There're many small features, implements of which are bothering.
+And some of them seem not very useful. So I don't plan to implement all of them
+until I find some useful. You can create issues when you need some features
+or just implement them by yourself.
+
 - [ ] Uploading
   - [x] 直传文件（upload）
   - [ ] 创建块（mkblk）
