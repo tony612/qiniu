@@ -1,4 +1,6 @@
-defmodule Qiniu.Fog do
+defmodule Qiniu.Fop do
+  alias Qiniu.HTTP
+
   @doc """
   Generate QR code for a image
 
