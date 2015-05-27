@@ -1,4 +1,4 @@
-defmodule Qiniu.Fog.Image do
+defmodule Qiniu.Fop.Image do
   alias Qiniu.HTTP
 
   @doc """
