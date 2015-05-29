@@ -17,4 +17,10 @@ defmodule Qiniu.Fop.ImageTest do
       assert Image.exif("http://img.url") == "response"
     end
   end
+
+  test "avg_hue" do
+    with_mock HTTP, [get: fn("http://img.url?imageAve") ->"response" end] do
+      assert Image.avg_hue("http://img.url") == "response"
+    end
+  end
 end
