@@ -18,6 +18,18 @@ defmodule Qiniu.Fop.ImageTest do
     end
   end
 
+  test "watermark for image type" do
+    with_mock HTTP, [get: fn("http://img.url?watermark/1/image/aHR0cDovL3dhdGVybWFyay51cmw=/") -> "response" end] do
+      assert Image.watermark(:image, "http://img.url", "http://watermark.url")
+    end
+  end
+
+  test "watermark for text type" do
+    with_mock HTTP, [get: fn("http://img.url?watermark/2/text/d2F0ZXJtYXJr/") -> "response" end] do
+      assert Image.watermark(:text, "http://img.url", "watermark")
+    end
+  end
+
   test "avg_hue" do
     with_mock HTTP, [get: fn("http://img.url?imageAve") ->"response" end] do
       assert Image.avg_hue("http://img.url") == "response"
