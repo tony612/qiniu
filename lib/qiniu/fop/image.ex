@@ -35,10 +35,10 @@ defmodule Qiniu.Fop.Image do
   ## Options
 
   For image type:
-    * `:dissolve`
-    * `:gravity`
-    * `:dx`
-    * `:dy`
+    * `:dissolve` - value for transparent, 1-100
+    * `:gravity` - default is SouthEast
+    * `:dx` - default is 10
+    * `:dy` - default is 10
 
   For text type:
     * `:font`
@@ -60,7 +60,10 @@ defmodule Qiniu.Fop.Image do
   def watermark(type, image_url, text, opts \\ [])
   def watermark(:text, image_url, text, opts) do
     valid_opts = Keyword.take(opts, [:font, :font_size, :fill, :dissolve, :gravity, :dx, :dy])
-    params = Enum.map_join(valid_opts, "/", fn {k, v} -> "#{k}/#{v}" end)
+    params = Enum.map_join(valid_opts, "/", fn {k, v} ->
+      encoded_v = if k == :font || k == :fill, do: Base.url_encode64(v), else: v
+      "#{k}/#{encoded_v}"
+    end)
     params = "?watermark/2/text/#{Base.url_encode64(text)}/" <> params
     HTTP.get image_url <> params
   end
