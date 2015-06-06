@@ -51,6 +51,13 @@ defmodule Qiniu.Resource do
     op_url(:delete, uri) |> auth_post
   end
 
+  @doc """
+  Batch operations for mix of `stat`, `copy`, `move` and `delete`
+
+  ## Fields
+
+    * `ops` - Array of all operations like `[[:stat, "b:k"], [:copy, "b:k", "b1:k1"]]`
+  """
   def batch(ops) do
     params = Enum.map_join(ops, "&", &("op=" <> apply(__MODULE__, :op_path, &1)))
     url = Qiniu.config[:rs_host] <> "?" <> params

@@ -38,4 +38,12 @@ defmodule Qiniu.ResourceTest do
       end
     end
   end
+
+  test "batch" do
+    with_mock Auth, [access_token: fn("http://rs.qiniu.com?op=/stat/Yjpr&op=/copy/Yjpr/YjE6azE=&op=/move/Yjpr/YjE6azE=&op=/delete/Yjpr", "") -> "access_token" end] do
+      with_mock HTTP, [post: fn("http://rs.qiniu.com?op=/stat/Yjpr&op=/copy/Yjpr/YjE6azE=&op=/move/Yjpr/YjE6azE=&op=/delete/Yjpr", "", headers: [Authorization: "QBox access_token"]) -> "response" end] do
+        assert Qiniu.Resource.batch([[:stat, "b:k"], [:copy, "b:k", "b1:k1"], [:move, "b:k", "b1:k1"], [:delete, "b:k"]]) == "response"
+      end
+    end
+  end
 end
