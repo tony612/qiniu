@@ -1,5 +1,5 @@
 defmodule Qiniu.ResourceTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case
 
   alias Qiniu.Resource
   alias Qiniu.HTTP
