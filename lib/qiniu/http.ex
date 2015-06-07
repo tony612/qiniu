@@ -30,4 +30,11 @@ defmodule Qiniu.HTTP do
       response
     end
   end
+
+  @doc false
+  def auth_post(url, body) do
+    post url, body, headers: [
+      Authorization: "QBox " <> Qiniu.Auth.access_token(url, body)
+    ]
+  end
 end

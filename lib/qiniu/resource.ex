@@ -131,10 +131,9 @@ defmodule Qiniu.Resource do
     auth_post(url)
   end
 
+  @doc false
   defp auth_post(url, body \\ "") do
-    Qiniu.HTTP.post url, body, headers: [
-      Authorization: "QBox " <> Qiniu.Auth.access_token(url, body)
-    ]
+    Qiniu.HTTP.auth_post(url, body)
   end
 
   defp op_url(op, source_uri, dest_uri \\ nil) do
