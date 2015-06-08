@@ -35,4 +35,16 @@ defmodule Qiniu.ResourceTest do
       assert Resource.batch([[:stat, "b:k"], [:copy, "b:k", "b1:k1"], [:move, "b:k", "b1:k1"], [:delete, "b:k"]]) == "response"
     end
   end
+
+  test "list with no options" do
+    with_mock HTTP, [auth_post: fn("http://rsf.qbox.me/list?bucket=bucket", "") -> "response" end] do
+      assert Resource.list("bucket") == "response"
+    end
+  end
+
+  test "list with options" do
+    with_mock HTTP, [auth_post: fn("http://rsf.qbox.me/list?bucket=bucket&limit=10&prefix=foo&delimiter=/&marker=m", "") -> "response" end] do
+      assert Resource.list("bucket", limit: 10, prefix: "foo", delimiter: "/", marker: "m") == "response"
+    end
+  end
 end
