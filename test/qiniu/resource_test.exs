@@ -47,4 +47,11 @@ defmodule Qiniu.ResourceTest do
       assert Resource.list("bucket", limit: 10, prefix: "foo", delimiter: "/", marker: "m") == "response"
     end
   end
+
+  test "fetch" do
+    with_mock HTTP, [auth_post: fn("http://iovip.qbox.me/fetch/aHR0cDovL2ltYWdlLnVybA==/to/YnVja2V0OmtleQ==", "") -> "response" end] do
+      assert Resource.fetch("http://image.url", "bucket:key") == "response"
+    end
+  end
+
 end
