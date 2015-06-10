@@ -54,4 +54,10 @@ defmodule Qiniu.ResourceTest do
     end
   end
 
+  test "prefetch" do
+    with_mock HTTP, [auth_post: fn("http://iovip.qbox.me/prefetch/YnVja2V0OmtleQ==", "") -> "response" end] do
+      assert Resource.prefetch("bucket:key") == "response"
+    end
+  end
+
 end
