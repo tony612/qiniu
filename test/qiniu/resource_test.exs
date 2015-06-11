@@ -60,4 +60,10 @@ defmodule Qiniu.ResourceTest do
     end
   end
 
+  test "chgm" do
+    with_mock HTTP, [auth_post: fn("http://rs.qiniu.com/chgm/YnVja2V0OmtleQ==/mime/YXBwbGljYXRpb24vanNvbg==", "") -> "response" end] do
+      assert Resource.chgm("bucket:key", "application/json") == "response"
+    end
+  end
+
 end
