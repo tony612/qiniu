@@ -57,7 +57,6 @@ defmodule Qiniu.Fop.Image do
     HTTP.get image_url <> params
   end
 
-  def watermark(type, image_url, text, opts \\ [])
   def watermark(:text, image_url, text, opts) do
     valid_opts = Keyword.take(opts, [:font, :font_size, :fill, :dissolve, :gravity, :dx, :dy])
     params = Enum.map_join(valid_opts, "/", fn {k, v} ->
