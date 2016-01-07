@@ -1,7 +1,7 @@
 defmodule Qiniu.Mixfile do
   use Mix.Project
 
-  @version "0.2.1"
+  @version "0.2.2"
 
   def project do
     [app: :qiniu,
@@ -34,7 +34,7 @@ defmodule Qiniu.Mixfile do
   end
 
   defp package do
-    [contributors: ["Tony Han"],
+    [maintainers: ["Tony Han"],
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/tony612/qiniu"},
      files: ~w(mix.exs README.md CHANGELOG.md lib config)]
