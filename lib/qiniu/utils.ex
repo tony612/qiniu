@@ -11,7 +11,17 @@ defmodule Qiniu.Utils do
   end
 
   defp current_seconds do
-    {mega, sec, _} = :erlang.now
+    {mega, sec, _} = current_time
+
     mega * 1_000_000 + sec
+  end
+
+  defp current_time do
+    case List.to_integer(:erlang.system_info(:otp_release)) do
+      18 ->
+        :os.timestamp
+      true ->
+        :erlang.now
+    end
   end
 end
