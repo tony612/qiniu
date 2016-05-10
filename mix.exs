@@ -8,6 +8,8 @@ defmodule Qiniu.Mixfile do
      version: @version,
      elixir: "~> 1.2",
      deps: deps,
+     test_coverage: [tool: ExCoveralls],
+     preferred_cli_env: preferred_cli_env,
 
      # Hex
      description: description,
@@ -23,6 +25,7 @@ defmodule Qiniu.Mixfile do
     [{:poison, "~> 2.1"},
      {:httpoison, "~> 0.8.3"},
      {:ex_doc, "~> 0.11.3", only: :docs},
+     {:excoveralls, "~> 0.5.3", only: :test},
      {:earmark, "~> 0.2.0", only: :docs},
      {:inch_ex, "~> 0.5.1", only: :docs},
      {:mock, "~> 0.1.0", only: :test}
@@ -38,6 +41,10 @@ defmodule Qiniu.Mixfile do
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/tony612/qiniu"},
      files: ~w(mix.exs README.md CHANGELOG.md lib config)]
+  end
+
+  defp preferred_cli_env do
+    ["coveralls": :test, "coveralls.detail": :test, "coveralls.html": :test]
   end
 
 end
