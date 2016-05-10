@@ -1,7 +1,27 @@
 # Changelog
 
-## master
+## v0.3.0 (2016-05-11)
 
+* drop support for Erlang 17 and Elixir 1.1
+* change `:key` of Qiniu.Uploader.upload/3 to optional based on Qiniu API doc
+* add tests for Qiniu.Uploader
+
+## v0.2.2 (2016-01-07)
+
+* support Erlang 18 and Elixir 1.1 & 1.2
+
+## v0.2.1 (2015-06-12)
+
+* add more tests
+* bug fix
+
+## v0.2.0 (2015-05-23)
+
+* add Qiniu.PutPolicy/build
+* add doc and more functions to Qiniu.Auth
+* add Qiniu.Resource
+* add Qiniu.Fop
+* add Qiniu.Fop.Image
 * change `key` of `upload` to a required param instead of an option
 
 ## v0.1.2 (2015-4-5)

@@ -6,36 +6,35 @@ Qiniu
 [![Inline docs](http://inch-ci.org/github/tony612/qiniu.svg?branch=master)](http://inch-ci.org/github/tony612/qiniu)
 [![hex.pm version](https://img.shields.io/hexpm/v/qiniu.svg)](https://hex.pm/packages/qiniu)
 
-Qiniu sdk for Elixir
+[Qiniu](http://www.qiniu.com) sdk for Elixir
 
-## Usage
+## Installation and config
 
-Config the keys
+* Add qiniu as dependence and application
 
 ```elixir
-# config.exs
+# mix.exs
+def application do
+  [applications: [:qiniu]]
+end
+
+defp deps do
+  [{:qiniu, "~> 0.3.0"}]
+end
+```
+
+Then run `$ mix deps.get`
+
+* Config the Qiniu API keys
+
+```elixir
+# config/prod.secret.exs (You'd better not add this file to git)
 config :qiniu, Qiniu,
   access_key: "key",
   secret_key: "secret"
 ```
 
-### Phoenix
-
-add :qiniu in deps, and application
-
-```elixir
-def application do
-    [...,
-     applications: [..., :qiniu]]
-end
-
-defp deps do
-  [
-  ...,
-  {:qiniu, "~> 0.2.2"}
-  ]
-end
-```
+## Usage
 
 ### Upload
 
@@ -50,7 +49,7 @@ Upload a local file in server
 
 ```elixir
 put_policy = Qiniu.PutPolicy.build("books")
-Qiniu.Uploader.upload put_policy, "/Users/tony612/cool.jpg", key: "cool.jpg"
+Qiniu.Uploader.upload put_policy, "~/cool.jpg", key: "cool.jpg"
 ```
 
 ### Download
@@ -61,11 +60,9 @@ Get the authorized download url
 Qiniu.Auth.authorize_download_url(url, 3600)
 ```
 
-See the [doc](http://hexdocs.pm/qiniu/) for detail
+**See the [doc](http://hexdocs.pm/qiniu/) for other features**
 
 ### TODO
-
-Remaining tests will be added.
 
 There're many small features, implements of which are bothering.
 And some of them seem not very useful. So I don't plan to implement all of them

@@ -12,7 +12,7 @@ defmodule Qiniu.Uploader do
   ## Example
 
       put_policy = %Qiniu.PutPolicy{scope: "books", deadline: 1427990400}
-      Qiniu.Uploader.upload put_policy, "~/cool.jpg", "cool.jpg"
+      Qiniu.Uploader.upload put_policy, "~/cool.jpg", key: "cool.jpg"
       # =>
       %HTTPoison.Response{
         body: "body",
