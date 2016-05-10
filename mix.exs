@@ -6,7 +6,7 @@ defmodule Qiniu.Mixfile do
   def project do
     [app: :qiniu,
      version: @version,
-     elixir: "~> 1.0",
+     elixir: "~> 1.2",
      deps: deps,
 
      # Hex
@@ -20,11 +20,11 @@ defmodule Qiniu.Mixfile do
   end
 
   defp deps do
-    [{:poison, "~> 1.3.1"},
-     {:httpoison, "~> 0.6.2"},
+    [{:poison, "~> 2.1"},
+     {:httpoison, "~> 0.8.3"},
      {:ex_doc, "~> 0.11.3", only: :docs},
      {:earmark, "~> 0.2.0", only: :docs},
-     {:inch_ex, "~> 0.4.0", only: :docs},
+     {:inch_ex, "~> 0.5.1", only: :docs},
      {:mock, "~> 0.1.0", only: :test}
     ]
   end

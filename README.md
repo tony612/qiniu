@@ -18,6 +18,24 @@ config :qiniu, Qiniu,
   secret_key: "secret"
 ```
 
+### Phoenix
+
+add :qiniu in deps, and application
+
+```elixir
+def application do
+    [...,
+     applications: [..., :qiniu]]
+end
+
+defp deps do
+  [
+  ...,
+  {:qiniu, "~> 0.2.2"}
+  ]
+end
+```
+
 ### Upload
 
 Get the token for uploading
@@ -30,8 +48,8 @@ uptoken = Qiniu.Auth.generate_uptoken(policy)
 Upload a local file in server
 
 ```elixir
-put_policy = Qiniu.PutPolicy("books")
-Qiniu.Uploader.upload put_policy, "~/cool.jpg", key: "cool.jpg"
+put_policy = Qiniu.PutPolicy.build("books")
+Qiniu.Uploader.upload put_policy, "/Users/tony612/cool.jpg", key: "cool.jpg"
 ```
 
 ### Download
