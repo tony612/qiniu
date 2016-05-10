@@ -1,5 +1,5 @@
 defmodule Qiniu.PutPolicyTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case
 
   doctest Qiniu.PutPolicy, except: [build: 1, build: 2, build: 3]
 

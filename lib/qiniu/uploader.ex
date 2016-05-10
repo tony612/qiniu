@@ -38,9 +38,9 @@ defmodule Qiniu.Uploader do
   end
 
   def upload(uptoken, local_file, opts) when is_binary(uptoken) do
-    opts = opts
-      |> Enum.map(fn {k, v} -> {to_string(k), v} end)
-      |> Enum.filter(fn {_, v} -> v != nil end)
+    # https://github.com/benoitc/hackney#send-a-body
+    # Name should be string
+    opts = Enum.map(opts, fn {k, v} -> {to_string(k), to_string(v)} end)
     data = List.flatten opts, [{:file, local_file}, {"token", uptoken}]
     post_data = {:multipart, data}
 

@@ -2,6 +2,7 @@ Qiniu
 =====
 
 [![Build Status](https://travis-ci.org/tony612/qiniu.svg?branch=master)](https://travis-ci.org/tony612/qiniu)
+[![Coverage Status](https://coveralls.io/repos/github/tony612/qiniu/badge.svg?branch=master)](https://coveralls.io/github/tony612/qiniu?branch=master)
 [![Inline docs](http://inch-ci.org/github/tony612/qiniu.svg?branch=master)](http://inch-ci.org/github/tony612/qiniu)
 [![hex.pm version](https://img.shields.io/hexpm/v/qiniu.svg)](https://hex.pm/packages/qiniu)
 
