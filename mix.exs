@@ -22,13 +22,13 @@ defmodule Qiniu.Mixfile do
   end
 
   defp deps do
-    [{:poison, "~> 2.1"},
+    [{:poison, "~> 2.1.0"},
      {:httpoison, "~> 0.8.3"},
-     {:ex_doc, "~> 0.11.3", only: :docs},
-     {:excoveralls, "~> 0.5.3", only: :test},
-     {:earmark, "~> 0.2.0", only: :docs},
+     {:ex_doc, "~> 0.11.5", only: :docs},
+     {:excoveralls, "~> 0.5.4", only: :test},
+     {:earmark, "~> 0.2.1", only: :docs},
      {:inch_ex, "~> 0.5.1", only: :docs},
-     {:mock, "~> 0.1.0", only: :test}
+     {:mock, "~> 0.1.3", only: :test}
     ]
   end
 
@@ -44,7 +44,7 @@ defmodule Qiniu.Mixfile do
   end
 
   defp preferred_cli_env do
-    ["coveralls": :test, "coveralls.detail": :test, "coveralls.html": :test]
+    ["coveralls": :test, "coveralls.travis": :test, "coveralls.html": :test]
   end
 
 end

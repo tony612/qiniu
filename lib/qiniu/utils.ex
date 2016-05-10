@@ -17,11 +17,6 @@ defmodule Qiniu.Utils do
   end
 
   defp current_time do
-    case List.to_integer(:erlang.system_info(:otp_release)) do
-      18 ->
-        :os.timestamp
-      true ->
-        :erlang.now
-    end
+    :os.timestamp
   end
 end
