@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.2 (2016-08-02)
+
+* transform keys of PutPolicy to camelCase. Thanks @goofansu for finding the issue #4
+
+## v0.3.1 (2016-07-04)
+
+* update poison version to "~> 2.0"
+
 ## v0.3.0 (2016-05-11)
 
 * drop support for Erlang 17 and Elixir 1.1
