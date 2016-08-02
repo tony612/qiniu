@@ -108,19 +108,20 @@ defmodule Qiniu.PutPolicy do
   end
 
   @doc """
-  Change put_policy to json string expect the `nil` values.
+  Change put_policy to json string expect the `nil` values, whose keys are camelCase.
 
   ## Examples
 
-      iex> policy = %Qiniu.PutPolicy{scope: "scope", deadline: 1427990400}
+      iex> policy = %Qiniu.PutPolicy{scope: "scope", deadline: 1427990400, return_body: "body"}
       iex> Qiniu.PutPolicy.to_json(policy)
-      ~s({"scope":"scope","deadline":1427990400})
+      ~s({"scope":"scope","returnBody":"body","deadline":1427990400})
   """
   @spec to_json(PutPolicy.t) :: String.t
   def to_json(%PutPolicy{} = policy) do
     policy
       |> Map.from_struct
       |> Enum.filter(fn {_, v} -> v != nil end)
+      |> Enum.map(fn {k, v} -> {Qiniu.Utils.camelize(k), v} end)
       |> Enum.into(%{})
       |> Poison.encode!
   end

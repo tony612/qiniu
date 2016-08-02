@@ -19,4 +19,19 @@ defmodule Qiniu.Utils do
   defp current_time do
     :os.timestamp
   end
+
+  @doc """
+  ## Examples
+
+      iex> Qiniu.Utils.camelize("return_body")
+      "returnBody"
+  """
+  def camelize(string) do
+    string |> to_string |> Macro.camelize |> uncapitalize
+  end
+
+  defp uncapitalize(str) do
+    {first, rest} = String.split_at(str, 1)
+    String.downcase(first) <> rest
+  end
 end
