@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.3 (2016-08-11)
+
+* parse HTTP response by default
+
 ## v0.3.2 (2016-08-02)
 
 * transform keys of PutPolicy to camelCase. Thanks @goofansu for finding the issue #4
