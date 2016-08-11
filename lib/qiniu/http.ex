@@ -24,10 +24,10 @@ defmodule Qiniu.HTTP do
       :post -> HTTPoison.post! url, body, headers
     end
 
-    if opts[:parse] do
-      %{response | body: Poison.decode!(response.body)}
-    else
+    if opts[:raw] do
       response
+    else
+      %{response | body: Poison.decode!(response.body)}
     end
   end
 
