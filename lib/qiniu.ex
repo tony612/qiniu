@@ -20,7 +20,7 @@ defmodule Qiniu do
 
   """
   def config do
-    Keyword.merge(default_config, Application.get_env(:qiniu, Qiniu, []))
+    Keyword.merge(default_config(), Application.get_env(:qiniu, Qiniu, []))
   end
 
   defp default_config do

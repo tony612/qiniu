@@ -7,13 +7,13 @@ defmodule Qiniu.Mixfile do
     [app: :qiniu,
      version: @version,
      elixir: "~> 1.2",
-     deps: deps,
+     deps: deps(),
      test_coverage: [tool: ExCoveralls],
-     preferred_cli_env: preferred_cli_env,
+     preferred_cli_env: preferred_cli_env(),
 
      # Hex
-     description: description,
-     package: package
+     description: description(),
+     package: package()
     ]
   end
 
@@ -22,13 +22,13 @@ defmodule Qiniu.Mixfile do
   end
 
   defp deps do
-    [{:poison, "~> 2.0"},
-     {:httpoison, "~> 0.8.3"},
+    [{:poison, "~> 3.0.0"},
+     {:httpoison, "~> 0.11.0"},
      {:ex_doc, "~> 0.11.5", only: :docs},
-     {:excoveralls, "~> 0.5.4", only: :test},
+     {:excoveralls, "~> 0.6.0", only: :test},
      {:earmark, "~> 0.2.1", only: :docs},
      {:inch_ex, "~> 0.5.1", only: :docs},
-     {:mock, "~> 0.1.3", only: :test}
+     {:mock, "~> 0.2.0", only: :test}
     ]
   end
 
