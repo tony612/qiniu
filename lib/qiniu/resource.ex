@@ -10,7 +10,7 @@ defmodule Qiniu.Resource do
 
   ## Fields
 
-    * `entry_uri` - uri of your resource entry, "<bucket>:<key>"
+    * `entry_uri` - uri of your resource entry, "bucket:key"
   """
   def stat(entry_uri) do
     op_url(:stat, entry_uri) |> auth_post
@@ -21,8 +21,8 @@ defmodule Qiniu.Resource do
 
   ## Fields
 
-    * `source_uri` - uri of your source entry, "<bucket>:<key>"
-    * `dest_uri` - uri of your dest entry, "<bucket>:<key>"
+    * `source_uri` - uri of your source entry, "bucket:key"
+    * `dest_uri` - uri of your dest entry, "bucket:key"
   """
   def copy(source_uri, dest_uri) do
     op_url(:copy, source_uri, dest_uri) |> auth_post
@@ -33,8 +33,8 @@ defmodule Qiniu.Resource do
 
   ## Fields
 
-    * `source_uri` - uri of your source entry, "<bucket>:<key>"
-    * `dest_uri` - uri of your dest entry, "<bucket>:<key>"
+    * `source_uri` - uri of your source entry, "bucket:key"
+    * `dest_uri` - uri of your dest entry, "bucket:key"
   """
   def move(source_uri, dest_uri) do
     op_url(:move, source_uri, dest_uri) |> auth_post
@@ -45,7 +45,7 @@ defmodule Qiniu.Resource do
 
   ## Fields
 
-    * `uri` - uri of your entry to delete, "<bucket>:<key>"
+    * `uri` - uri of your entry to delete, "bucket:key"
   """
   def delete(uri) do
     op_url(:delete, uri) |> auth_post
@@ -93,7 +93,7 @@ defmodule Qiniu.Resource do
   ## Fields
 
     * `url` - URL of the external resource
-    * `entry_uri` - URI of your entry, "<bucket>:<key>"
+    * `entry_uri` - URI of your entry, "bucket:key"
   """
   def fetch(url, entry_uri) do
     encoded_url = Base.url_encode64(url)
@@ -109,7 +109,7 @@ defmodule Qiniu.Resource do
 
   ## Fields
 
-    * `uri` - URI of destiny entry, "<bucket>:<key>"
+    * `uri` - URI of destiny entry, "bucket:key"
   """
   def prefetch(uri) do
     url = Path.join([Qiniu.config[:io_host], "prefetch", Base.url_encode64(uri)])
@@ -121,7 +121,7 @@ defmodule Qiniu.Resource do
 
   ## Fields
 
-    * `uri` - URI of the entry, "<bucket>:<key>"
+    * `uri` - URI of the entry, "bucket:key"
     * `mime` - MIME type to change
   """
   def chgm(entry_uri, mime) do
