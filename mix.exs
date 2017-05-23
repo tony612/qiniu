@@ -28,7 +28,7 @@ defmodule Qiniu.Mixfile do
      {:excoveralls, "~> 0.6.0", only: :test},
      {:earmark, "~> 0.2.1", only: :docs},
      {:inch_ex, "~> 0.5.1", only: :docs},
-     {:mock, "~> 0.2.0", only: :test}
+     {:mock, "~> 0.2.1", only: :test}
     ]
   end
 

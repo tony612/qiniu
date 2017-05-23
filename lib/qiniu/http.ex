@@ -27,7 +27,10 @@ defmodule Qiniu.HTTP do
     if opts[:raw] do
       response
     else
-      %{response | body: Poison.decode!(response.body)}
+      case Poison.decode(response.body) do
+        {:ok, body} -> %{response | body: body}
+        _           -> response
+      end
     end
   end
 
