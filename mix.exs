@@ -24,11 +24,11 @@ defmodule Qiniu.Mixfile do
   defp deps do
     [{:poison, "~> 2.2"},
      {:httpoison, "~> 0.10"},
-     {:ex_doc, "~> 0.11.5", only: :docs},
-     {:excoveralls, "~> 0.6.0", only: :test},
-     {:earmark, "~> 0.2.1", only: :docs},
-     {:inch_ex, "~> 0.5.1", only: :docs},
-     {:mock, "~> 0.2.1", only: :test}
+     {:ex_doc, "~> 0.16", only: :docs},
+     {:excoveralls, "~> 0.6", only: :test},
+     {:earmark, "~> 1.2", only: :docs},
+     {:inch_ex, "~> 0.5", only: :docs},
+     {:mock, "~> 0.2", only: :test}
     ]
   end
 
