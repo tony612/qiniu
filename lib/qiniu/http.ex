@@ -35,9 +35,13 @@ defmodule Qiniu.HTTP do
   end
 
   @doc false
-  def auth_post(url, body) do
-    post url, body, headers: [
-      Authorization: "QBox " <> Qiniu.Auth.access_token(url, body)
-    ]
+  def auth_post(url, body, headers \\ []) do
+    post url, body, headers: Keyword.merge(
+      [
+        Authorization: "QBox " <> Qiniu.Auth.access_token(url, body),
+        "Content-Type": Qiniu.config[:content_type]
+      ],
+      headers
+    )
   end
 end
