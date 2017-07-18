@@ -44,11 +44,11 @@ defmodule Qiniu.ChunkUpload do
   end
 
   def send_block([chunk | rest], block_size, opts, uptoken) do
-    with %HTTPoison.Response{body: %{"ctx" => ctx, "host" => host}}
-                         <- mkblk(chunk, opts, uptoken, block_size) do
-      send_chunk(rest, 1, ctx, uptoken, host)
-    else
-      error -> error
+    case mkblk(chunk, opts, uptoken, block_size) do
+      %HTTPoison.Response{body: %{"ctx" => ctx, "host" => host}} ->
+        send_chunk(rest, 1, ctx, uptoken, host)
+      error ->
+        error
     end
   end
 
