@@ -19,18 +19,17 @@ defmodule Qiniu.ChunkUpload do
     * `:mimeType`   - file name in a Qiniu bucket
   """
   def chunk_upload(put_policy, local_file, opts \\ [])
-
   def chunk_upload(%PutPolicy{}=put_policy, local_file, opts) do
     uptoken = Qiniu.Auth.generate_uptoken(put_policy)
     chunk_upload(uptoken, local_file, opts)
   end
-
   def chunk_upload(uptoken, local_file, opts) when is_binary(uptoken) do
     case File.stat(local_file) do
       {:ok, %{size: file_size, type: :regular}} ->
         File.stream!(local_file, [], @default_block_size)
         |> Stream.map(fn(blk) ->
-          chop(blk, @default_chunk_size)
+          blk
+          |> chop(@default_chunk_size)
           |> send_block(byte_size(blk), opts, uptoken)
         end)
         |> Enum.join(",")
@@ -53,7 +52,6 @@ defmodule Qiniu.ChunkUpload do
   end
 
   def send_chunk([], _offset, ctx, _uptoken, _host), do: ctx
-
   def send_chunk([chunk | rest], offset, ctx, uptoken, host) do
     case bput(chunk, offset, ctx, uptoken, host) do
       %HTTPoison.Response{body: %{"ctx" => ctx, "host" => host}} ->
@@ -75,7 +73,6 @@ defmodule Qiniu.ChunkUpload do
     <<chunk :: binary-size(chunk_size), rest :: binary>> = chunks
     chop(rest, chunk_size, [chunk | acc])
   end
-
   def chop(chunks, _size, acc) do
     Enum.reverse([chunks | acc])
   end
@@ -118,7 +115,6 @@ defmodule Qiniu.ChunkUpload do
   end
 
   def post_with_retry(url, body, headers, retry_limit \\ 1)
-
   def post_with_retry(url, body, headers, retry_limit) when retry_limit > 0 do
     try do
       Qiniu.HTTP.post(url, body, headers)
@@ -130,7 +126,6 @@ defmodule Qiniu.ChunkUpload do
         end
     end
   end
-
   def post_with_retry(url, body, headers, _retry_limit) do
     Qiniu.HTTP.post(url, body, headers)
   end
