@@ -52,12 +52,27 @@ put_policy = Qiniu.PutPolicy.build("books")
 Qiniu.Uploader.upload put_policy, "~/cool.jpg", key: "cool.jpg"
 ```
 
+Chunked upload
+
+```elixir
+put_policy = Qiniu.PutPolicy.build("books")
+Qiniu.ChunkUpload.chunk_upload put_policy, "~/cool.jpg", key: "cool.jpg"
+```
+
 ### Download
 
 Get the authorized download url
 
 ```elixir
 Qiniu.Auth.authorize_download_url(url, 3600)
+```
+
+### Media Processing
+
+AV transcoding
+
+```elixir
+Qiniu.Fop.AV.trans_fops([avthumb: "mp4", s: "640x360", saveas: "bucket1:test.mp4"])
 ```
 
 **See the [doc](http://hexdocs.pm/qiniu/) for other features**
@@ -69,11 +84,11 @@ And some of them seem not very useful. So I don't plan to implement all of them
 until I find some useful. You can create issues when you need some features
 or just implement them by yourself.
 
-- [ ] Uploading
+- [x] Uploading
   - [x] 直传文件（upload）
-  - [ ] 创建块（mkblk）
-  - [ ] 上传片（bput）
-  - [ ] 创建文件（bput）
+  - [x] 创建块（mkblk）
+  - [x] 上传片（bput）
+  - [x] 创建文件（bput）
 - [x] Resource management
   - [x] 获取资源信息（stat）
   - [x] 复制资源（copy）

@@ -30,7 +30,8 @@ defmodule Qiniu do
       up_host:          "http://up.qiniu.com",
       rs_host:          "http://rs.qiniu.com",
       rsf_host:         "http://rsf.qbox.me",
-      io_host:          "http://iovip.qbox.me"
+      io_host:          "http://iovip.qbox.me",
+      api_host:         "http://api.qiniu.com"
     ]
   end
 end
