@@ -6,17 +6,17 @@ defmodule Qiniu.Fop.AV do
   alias Qiniu.HTTP
 
   def avthumb(bucket_name, key, opts \\ []) do
-    query_opts = opts |> Keyword.take([:"notifyURL", :pipeline]) |> Enum.into(%{})
-    fog_opts = opts |> Keyword.delete(:"notifyURL") |> Keyword.delete(:pipeline)
+    query_opts = opts |> Keyword.take([:notifyURL, :pipeline]) |> Enum.into(%{})
+    fog_opts = opts |> Keyword.delete(:notifyURL) |> Keyword.delete(:pipeline)
 
-    body = URI.encode_query(
+    body =
       %{
         bucket: bucket_name,
         key: key,
         fops: trans_fops(fog_opts),
       }
       |> Map.merge(query_opts)
-    )
+      |> URI.encode_query
 
     HTTP.auth_post("#{Qiniu.config[:api_host]}/pfop/", body)
   end
@@ -37,7 +37,6 @@ defmodule Qiniu.Fop.AV do
       end
     end)
   end
-
   defp trans_fop(:saveas, bucket_name_key) do
     "|saveas/" <> Base.url_encode64(bucket_name_key)
   end
