@@ -9,6 +9,7 @@ defmodule Qiniu.PutPolicy do
   alias __MODULE__
 
   defstruct scope:                 nil,
+            is_prefixal_scope:     nil,
             deadline:              nil,
             insert_only:           nil,
             save_key:              nil,
@@ -23,13 +24,16 @@ defmodule Qiniu.PutPolicy do
             persistent_ops:        nil,
             persistent_notify_url: nil,
             persistent_pipeline:   nil,
+            fsize_min:             nil,
             fsize_limit:           nil,
             detect_mime:           nil,
             mime_limit:            nil,
-            checksum:              nil
+            checksum:              nil,
+            file_type:             nil
 
   @type t :: %Qiniu.PutPolicy{
             scope:                 String.t,
+            is_prefixal_scope:     integer | nil,
             deadline:              integer,
             insert_only:           integer | nil,
             save_key:              String.t | nil,
@@ -44,10 +48,12 @@ defmodule Qiniu.PutPolicy do
             persistent_ops:        String.t | nil,
             persistent_notify_url: String.t | nil,
             persistent_pipeline:   String.t | nil,
+            fsize_min:             integer | nil,
             fsize_limit:           integer | nil,
             detect_mime:           integer | nil,
             mime_limit:            String.t | nil,
-            checksum:              String.t | nil
+            checksum:              String.t | nil,
+            file_type:             integer | nil
             }
 
   @default_expires_in 3600
